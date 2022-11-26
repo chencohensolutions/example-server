@@ -7,7 +7,7 @@ const development = {
     },
     jwtSecret: 'development_secret',
     registerSecret: 'C6Qr8cnqUHqvhLZnK1zme7Lnyq1RfNRR',
-    accessControlAllowOrigin: 'http://localhost:3120',
+    accessControlAllowOrigin: 'http://localhost:3000',
 };
 
 export default development;

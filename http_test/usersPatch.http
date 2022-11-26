@@ -1,3 +1,10 @@
-GET http://localhost:3040/1/users HTTP/1.1
+PATCH http://localhost:3040/1/users/6381fa261c1e123acd65c7f6 HTTP/1.1
 content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbmNvaGVuODNAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjY5NDYyNzUzLCJleHAiOjE2NzIwNTQ3NTN9.0LlJZza312xQq_Pr-DXw0kKdmccHUgp8S75banxgDaE
+
+{
+    "email": "hencohen83.8@gmail.com",
+      "name": "hen cohen19",
+      "role": "user",
+      "password": "aaaaaa"
+}

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import config from '@config';
 const { jwtSecret } = config;
-import { EUserRole, insertUser, getUserByEmail } from '@db';
+import { EUserRole, insertUser, getUserByEmail, getAllUsers, getUsers } from '@db';
 
 import express from 'express';
 const router = express.Router();
@@ -38,10 +38,13 @@ const loginPassword = async (loginEmail: string, loginPassword: string) => {
         if (_id) {
             if (await bcrypt.compare(loginPassword, password)) {
                 const token = jwt.sign({ email, role }, jwtSecret, { expiresIn: 60 * 60 * 24 * 30 });
-                return { _id, email, password, role, token };
-                // const userData = getUserData(_id);
-                // if (userData) return userData;
-                throw { code: 4, message: 'password incorrect' };
+                let users = [];
+                if (role === EUserRole.admin) {
+                    users = await getAllUsers();
+                } else {
+                    users = await getUsers();
+                }
+                return { _id, email, role, token, users };
             } else {
                 throw { code: 4, message: 'password incorrect' };
             }
@@ -74,9 +77,15 @@ const loginToken = async (loginToken: string) => {
     try {
         const { email: loginEmail } = jwt.verify(loginToken, jwtSecret);
         if (loginEmail) {
-            let { _id, email, role } = await getUserByEmail(loginEmail);
+            let { _id, email, role, name } = await getUserByEmail(loginEmail);
             if (_id) {
-                return { _id, email, role };
+                let users = [];
+                if (role === EUserRole.admin) {
+                    users = await getAllUsers();
+                } else {
+                    users = await getUsers();
+                }
+                return { _id, email, role, name, users };
             } else {
                 throw { code: ELoginTokenError.Unknown, message: 'unknown error' };
             }

@@ -35,13 +35,40 @@ export interface IUser {
 //     return result[0];
 // };
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (userEmail: string) => {
     const { client, database } = connectDb();
     const users = database.collection<IUser>('users');
-    const result = await users.findOne({ email });
-    console.log('getUserByEmail', result);
+    const { _id, email, name, role, password } = await users.findOne({ email: userEmail });
+    console.log('getUserByEmail', _id.toString());
     client.close();
-    return result;
+    if (_id) {
+        return {
+            _id: _id.toString(),
+            email,
+            name,
+            role,
+            password,
+        };
+    }
+    throw null;
+};
+
+export const updateUser = async (userId, email, name, role, password) => {
+    try {
+        const { client, database } = connectDb();
+        const users = database.collection('users');
+        const query = { _id: new ObjectId(userId) };
+        var newvalues = { $set: { email, name, role } as any };
+        if (password !== null) {
+            newvalues.$set.password = password;
+        }
+        const result = await users.updateOne(query, newvalues);
+        console.log('updateUser', result);
+        client.close();
+        return result.modifiedCount;
+    } catch (errorDb) {
+        throw { errorDb };
+    }
 };
 
 export const deleteUser = async (userId) => {

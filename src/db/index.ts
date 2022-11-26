@@ -1,7 +1,7 @@
 import path from 'path';
 
 import config from '@config';
-export { insertUser, getAllUsers, EUserRole, getUserByEmail, deleteUser, getUsers } from './users';
+export { insertUser, getAllUsers, EUserRole, getUserByEmail, deleteUser, getUsers, updateUser } from './users';
 const { db: dbConfig } = config;
 
 console.info('connecting to db', dbConfig.database, dbConfig.host);
