@@ -19,6 +19,7 @@ const addUser = async (email, name, role, password) => {
         const result = await insertUser(email, name, role, hashedPassword);
         console.log('addUser', result);
         return {
+            _id: result.insertedId,
             email,
             name,
             role,
@@ -33,7 +34,7 @@ const removeUser = async (userId) => {
         const result = await deleteUser(userId);
         console.log('addUser', result);
         return {
-            deleted: result,
+            deleted: result ? userId : 0,
         };
     } catch (err) {
         throw err;
