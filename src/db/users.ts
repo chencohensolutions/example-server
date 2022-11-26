@@ -104,7 +104,7 @@ export const insertUser = async (email, name, role: EUserRole, password) => {
         });
         console.log(`A document was inserted with the _id: ${result.insertedId}`);
         client.close();
-        return result;
+        return result.insertedId.toString();
     } finally {
     }
 };

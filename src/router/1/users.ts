@@ -46,13 +46,13 @@ const addUser = async (email, name, role, password) => {
     try {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-        const result = await insertUser(email, name, role, hashedPassword);
-        console.log('addUser', result);
+        const _id = await insertUser(email, name, role, hashedPassword);
+        const users = await getAllUsers();
+
+        console.log('addUser', _id);
         return {
-            _id: result.insertedId,
-            email,
-            name,
-            role,
+            _id,
+            users,
         };
     } catch (err) {
         throw err;
