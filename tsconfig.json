@@ -1,0 +1,37 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"target": "es6",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"outDir": "dist",
+		"baseUrl": ".", // This must be specified if "paths" is.
+		"paths": {
+			"@config": [
+				"src/config"
+			],
+			"@utils": [
+				"src/utils"
+			],
+			"@db": [
+				"src/db"
+			]
+		},
+		"typeRoots": [
+			"./node_modules/@types",
+			"./src/@types"
+		],
+		"rootDirs": [
+			"src",
+			"dist"
+		]
+	},
+	"include": [
+		"src",
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

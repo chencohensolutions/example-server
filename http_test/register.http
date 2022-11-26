@@ -1,0 +1,10 @@
+POST http://localhost:3040/1/register HTTP/1.1
+content-type: application/json
+secret: C6Qr8cnqUHqvhLZnK1zme7Lnyq1RfNRR
+
+{
+    "email": "hencohen83@gmail.com",
+    "name": "hen cohen",
+    "role": "admin",
+    "password": "aaaaaa"
+}
