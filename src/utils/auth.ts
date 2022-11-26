@@ -10,10 +10,10 @@ export const tokenAuth = async (req, res, next) => {
         if (!token) {
             throw 'No token provided';
         }
-        const { name, role } = jwt.verify(token, jwtSecret);
-        if (name) {
+        const { email, role } = jwt.verify(token, jwtSecret);
+        if (email) {
             req.session = {
-                name,
+                email,
                 role,
             };
             next();
