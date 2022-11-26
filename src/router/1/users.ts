@@ -1,6 +1,7 @@
 import { insertUser } from '@db';
 import { adminAuth, tokenAuth, createRouterEndpoint } from '@utils';
 import express from 'express';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
@@ -11,9 +12,19 @@ export enum EReportType {
 }
 
 const addUser = async (email, name, role, password) => {
-    const result = await insertUser(email, name, role, password);
-    console.log('addUser', result);
-    return result;
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const result = await insertUser(email, name, role, hashedPassword);
+        console.log('addUser', result);
+        return {
+            email,
+            name,
+            role,
+        };
+    } catch (err) {
+        throw err;
+    }
 };
 
 const getUsers = async (session) => {};

@@ -58,7 +58,8 @@ export const userAuth = async (req, res, next) => {
 
 export const adminAuth = async (req, res, next) => {
     try {
-        const token = req.headers.authorization;
+        const authorization = req.headers.authorization;
+        const token = authorization.replace(/^Bearer\s+/, '');
         if (!token) {
             throw 'No token provided';
         }
