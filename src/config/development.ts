@@ -1,5 +1,6 @@
 const development = {
     db: {
+        uri: 'mongodb+srv://ktrust:8tHX6HEbGv8QFDLq@cluster0.vqras4k.mongodb.net/test',
         user: 'ktrust',
         database: 'ktrust-development',
         host: 'cluster0.vqras4k.mongodb.net',

@@ -1,11 +1,5 @@
 {
     "editor.formatOnSave": true,
-    "workbench.colorCustomizations": {
-        "titleBar.activeBackground": "#00FF88",
-        "titleBar.activeForeground": "#000000"
-    },
-    "sql-formatter.uppercase": true,
-    "sql-formatter.dialect": "sql",
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
