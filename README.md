@@ -1,1 +1,1 @@
-# ktrust-server
+# example server
